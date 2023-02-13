@@ -1,2 +1,36 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<%= content_for :head do %>
+    <%= javascript_import_module_tag "custom" %>
+    <%= stylesheet_link_tag "styles", "data-turbo-track": "reload" %>
+<% end %>
+
+<div id="bubbleCanvas">
+    <button id="addBtn"></button>
+</div>
+<div id="addMenu">
+    <button id="closeBtn"></button>
+    <div class="inputElements topElement"><label>Task Name: </label><input type="text" id="nameTask" maxlength="7"></div>
+    <div class="inputElements"><label>Task Description: </label><input type="text" id="descriptionTask" maxlength="69"></div>
+    <div class="inputElements"><label>Completion Date: </label><input type="date" id="dateTask" min=""></div>
+    <div class="inputElements"><label>Time Required: </label><input type="text" id="timeTask" maxlength="12"></div>
+    <div class="inputElements">
+        <label style="position: relative; bottom: 20px;">Colour: </label>
+        <table class="colorTable">
+            <tr>
+                <td><div class = "colorBoxes" id="color1"></div></td>
+                <td><div class = "colorBoxes" id="color2"></div></td>
+                <td><div class = "colorBoxes" id="color3"></div></td>
+                <td><div class = "colorBoxes" id="color4"></div></td>
+                <td><div class = "colorBoxes" id="color5"></div></td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="colorTask1" name="color"></td>
+                <td><input type="radio" id="colorTask2" name="color"></td>
+                <td><input type="radio" id="colorTask3" name="color"></td>
+                <td><input type="radio" id="colorTask4" name="color"></td>
+                <td><input type="radio" id="colorTask5" name="color"></td>
+            </tr>
+        </table>
+    </div>
+    <button id="submitBtn">Add</button>
+</div>
+
