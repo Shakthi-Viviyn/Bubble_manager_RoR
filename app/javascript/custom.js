@@ -6,14 +6,13 @@ var nextId = 0;
 const currentDate = new Date();
 document.getElementById("dateTask").setAttribute("min",currentDate.toISOString().slice(0,10));
 
-<%circle = Circle.find(1)%>
-allPosData = JSON.parse("<%= circle.data %>");
-
-if (allPosData !== null){
-    nextId = allPosData.length;
+if ((document.getElementById("circleData").innerText) == ""){
+    allPosData = []
 }else{
-    allPosData = [];
+    allPosData = JSON.parse(document.getElementById("circleData").innerText);
+    nextId = allPosData.length;
 }
+
 for (var i = 0; i < allPosData.length; i++){
     var objectDate = new Date(allPosData[i].date);
     allPosData[i].date = objectDate;
@@ -126,8 +125,7 @@ document.getElementById("submitBtn").addEventListener("click",function(e){
     newCircle.y = posData[1];
     attachListeners(newCircle.id);
     allPosData.push(newCircle);
-    <%circle.data%> = JSON.stringify(allPosData);
-    <%circle.save%>
+    var updatedData = JSON.stringify(allPosData);
     localStorage.setItem("CircleData",updatedData);
     document.getElementById("nameTask").value = "";
     document.getElementById("descriptionTask").value = "";
@@ -304,8 +302,8 @@ function deleteBubble(id){
         allPosData[id] = lastElement;  
     }
     decrementId();
-    <%circle.data%> = JSON.stringify(allPosData);
-    <%circle.save%>
+    var updatedData = JSON.stringify(allPosData);
+    localStorage.setItem("CircleData",updatedData);
 }
 
 /*
