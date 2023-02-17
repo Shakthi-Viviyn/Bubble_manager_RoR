@@ -126,7 +126,22 @@ document.getElementById("submitBtn").addEventListener("click",function(e){
     attachListeners(newCircle.id);
     allPosData.push(newCircle);
     var updatedData = JSON.stringify(allPosData);
-    localStorage.setItem("CircleData",updatedData);
+    
+    fetch('/home', {
+    method: 'POST', // or 'PUT'
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: updatedData,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
     document.getElementById("nameTask").value = "";
     document.getElementById("descriptionTask").value = "";
     document.getElementById("timeTask").value = "";
@@ -303,7 +318,23 @@ function deleteBubble(id){
     }
     decrementId();
     var updatedData = JSON.stringify(allPosData);
-    localStorage.setItem("CircleData",updatedData);
+    var token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+    fetch('/home', {
+    method: 'POST', // or 'PUT'
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
+    },
+    body: updatedData,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }
 
 /*
