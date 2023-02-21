@@ -1,3 +1,4 @@
+
 var allPosData = [];
 var xBounds = 150;
 var yBounds = 100;
@@ -9,12 +10,15 @@ document.getElementById("dateTask").setAttribute("min",currentDate.toISOString()
 if ((document.getElementById("circleData").innerText) == ""){
     allPosData = []
 }else{
+    
     allPosData = JSON.parse(document.getElementById("circleData").innerText);
     nextId = allPosData.length;
 }
 console.log(allPosData);
 for (var i = 0; i < allPosData.length; i++){
+    console.log("Before conversion");
     var objectDate = new Date(allPosData[i].date);
+    console.log("After conversion");
     allPosData[i].date = objectDate;
     allPosData[i].size = giveSize(allPosData[i].date);
     var newCircle = allPosData[i];
@@ -126,11 +130,12 @@ document.getElementById("submitBtn").addEventListener("click",function(e){
     attachListeners(newCircle.id);
     allPosData.push(newCircle);
     var updatedData = JSON.stringify(allPosData);
-    
+    var token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
     fetch('/home', {
     method: 'POST', // or 'PUT'
     headers: {
         'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
     },
     body: updatedData,
     })
@@ -322,7 +327,7 @@ function deleteBubble(id){
     decrementId();
     var updatedData = JSON.stringify(allPosData);
     var token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
-
+    console.log(token);
     fetch('/home', {
     method: 'POST', // or 'PUT'
     headers: {
