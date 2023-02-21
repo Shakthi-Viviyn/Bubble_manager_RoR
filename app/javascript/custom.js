@@ -7,10 +7,9 @@ var nextId = 0;
 const currentDate = new Date();
 document.getElementById("dateTask").setAttribute("min",currentDate.toISOString().slice(0,10));
 
-if ((document.getElementById("circleData").innerText) == ""){
+if (((document.getElementById("circleData").innerText) == "")){
     allPosData = []
 }else{
-    
     allPosData = JSON.parse(document.getElementById("circleData").innerText);
     nextId = allPosData.length;
 }
