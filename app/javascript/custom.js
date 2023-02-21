@@ -12,7 +12,7 @@ if ((document.getElementById("circleData").innerText) == ""){
     allPosData = JSON.parse(document.getElementById("circleData").innerText);
     nextId = allPosData.length;
 }
-
+console.log(allPosData);
 for (var i = 0; i < allPosData.length; i++){
     var objectDate = new Date(allPosData[i].date);
     allPosData[i].date = objectDate;
@@ -308,11 +308,14 @@ var popSound = new Audio("assets/pop.mp3");
 
 function deleteBubble(id){
     var nodeToRemove = document.getElementById(id);
+    console.log(nodeToRemove);
     document.getElementById("bubbleCanvas").removeChild(nodeToRemove);
     if (id === allPosData.length-1){
         allPosData.pop();
     }else{
         var lastElement = allPosData.pop();
+        document.getElementById(lastElement.id).setAttribute("id",id);
+        attachListeners(id);
         lastElement.id = id;
         allPosData[id] = lastElement;  
     }
