@@ -308,7 +308,7 @@ function hideDetails(id){
     circle.style.top = yShift;
 }
 
-var popSound = new Audio("assets/pop.mp3");
+var popSound = new Audio("/pop.mp3");
 
 function deleteBubble(id){
     var nodeToRemove = document.getElementById(id);
