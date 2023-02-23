@@ -10,14 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_17_222411) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_23_001846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "circles", force: :cascade do |t|
-    t.text "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.text "date"
+    t.string "color"
+    t.text "time"
+    t.text "description"
+    t.integer "size"
+    t.integer "x"
+    t.integer "y"
   end
 
 end
